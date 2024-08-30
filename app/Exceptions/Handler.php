@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Response;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -26,5 +27,32 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $e)
+    {
+        if ($request->is('api/*') && $e) {
+            switch (get_class($e)) {
+                case \Illuminate\Auth\Access\AuthorizationException::class:
+                    return response()->json([
+                        'message' => 'Требуется авторизация'
+                    ], Response::HTTP_UNAUTHORIZED);
+                case \Illuminate\Database\Eloquent\ModelNotFoundException::class:
+                    return response()->json([
+                        'message' => 'Не найдено'
+                    ], Response::HTTP_NOT_FOUND);
+                case \Illuminate\Validation\ValidationException::class:
+                    return response()->json([
+                        'message' => $e->getMessage(),
+                        'errors' => collect($e->errors())->flatten()->all()
+                    ], Response::HTTP_UNPROCESSABLE_ENTITY);
+                default:
+                    return response()->json([
+                        'message' => $e->getMessage()
+                    ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            }
+        }
+
+        return parent::render($request, $e);
     }
 }

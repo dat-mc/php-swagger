@@ -1,0 +1,7 @@
+/bootstrap/cache/*
+!/bootstrap/cache
+/public/storage
+/storage
+/vendor
+/resources/views/vendor
+.env

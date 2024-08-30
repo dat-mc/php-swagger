@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
-class AuthController extends BaseController
+class AuthController extends Controller
 {
-    public function logout(Request $request): \Illuminate\Http\JsonResponse
+    public function logout(Request $request)
     {
         $success['userName'] = Auth::user()->name;
         Auth::user()->tokens()->delete();
@@ -17,17 +18,16 @@ class AuthController extends BaseController
         return $this->sendResponse($success, 'Logged out successfully');
     }
 
-    public function signin(Request $request): \Illuminate\Http\JsonResponse
+    public function signin(Request $request)
     {
-        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             $authUser = Auth::user();
             $success['token'] =  $authUser->createToken('MyAuthApp')->plainTextToken;
             $success['name'] =  $authUser->name;
 
             return $this->sendResponse($success, 'User signed in');
-        }
-        else{
-            return $this->sendError('Unauthorised.', ['error'=>'Unauthorised']);
+        } else {
+            return $this->sendError('Unauthorised.', ['error' => 'Unauthorised']);
         }
     }
     public function signup(Request $request)
@@ -39,7 +39,7 @@ class AuthController extends BaseController
             'confirm_password' => 'required|same:password',
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
 
             return $this->sendError('Error validation', $validator->errors());
         }
