@@ -1,7 +1,13 @@
 /bootstrap/cache/*
-!/bootstrap/cache
+!/bootstrap/cache/.gitkeep
 /public/storage
-/storage
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/
+!/storage/framework/cache/.gitkeep
+!/storage/framework/sessions/.gitkeep
+!/storage/framework/views/.gitkeep
 /vendor
 /resources/views/vendor
 .env
