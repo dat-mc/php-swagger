@@ -33,6 +33,10 @@ class Handler extends ExceptionHandler
     {
         if ($request->is('api/*') && $e) {
             switch (get_class($e)) {
+                case \Illuminate\Auth\AuthenticationException::class:
+                    return response()->json([
+                        'message' => 'Не авторизован'
+                    ], Response::HTTP_UNAUTHORIZED);
                 case \Illuminate\Auth\Access\AuthorizationException::class:
                     return response()->json([
                         'message' => 'Требуется авторизация'

@@ -27,6 +27,7 @@ class PostController extends Controller
      * @OA\Get(
      *      path="/api/posts",
      *      tags={"Posts"},
+     *      security={{"sanctum": {}}},
      *      @OA\Response(
      *          response="200",
      *          description="Посты успешно получены",
@@ -41,6 +42,19 @@ class PostController extends Controller
      *                  property="data",
      *                  type="array",
      *                  @OA\Items(ref="#/components/schemas/PostResource")
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response="401",
+     *          description="Ошибка авторизации",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string",
+     *                  description="Сообщение об ошибке",
+     *                  example="Unauthenticated."
      *              )
      *          )
      *      ),
@@ -68,6 +82,7 @@ class PostController extends Controller
      * @OA\Post(
      *      path="/api/posts",
      *      tags={"Posts"},
+     *      security={{"sanctum": {}}},
      *      @OA\RequestBody(
      *          required=true,
      *          @OA\JsonContent(ref="#/components/schemas/StorePostRequest")
@@ -85,6 +100,19 @@ class PostController extends Controller
      *              @OA\Property(
      *                  property="data",
      *                  ref="#/components/schemas/PostResource"
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response="401",
+     *          description="Ошибка авторизации",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string",
+     *                  description="Сообщение об ошибке",
+     *                  example="Unauthenticated."
      *              )
      *          )
      *      ),
@@ -133,6 +161,7 @@ class PostController extends Controller
      * @OA\Get(
      *      path="/api/posts/{id}",
      *      tags={"Posts"},
+     *      security={{"sanctum": {}}},
      *      @OA\Parameter(
      *          name="id",
      *          in="path",
@@ -160,6 +189,19 @@ class PostController extends Controller
      *          )
      *      ),
      *      @OA\Response(
+     *          response="401",
+     *          description="Ошибка авторизации",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string",
+     *                  description="Сообщение об ошибке",
+     *                  example="Unauthenticated."
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(
      *          response="500",
      *          description="Произошла ошибка",
      *          @OA\JsonContent(
@@ -183,6 +225,7 @@ class PostController extends Controller
      * @OA\Put(
      *      path="/api/posts/{id}",
      *      tags={"Posts"},
+     *      security={{"sanctum": {}}},
      *      @OA\Parameter(
      *          name="id",
      *          in="path",
@@ -210,6 +253,19 @@ class PostController extends Controller
      *              @OA\Property(
      *                  property="data",
      *                  ref="#/components/schemas/PostResource"
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response="401",
+     *          description="Ошибка авторизации",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string",
+     *                  description="Сообщение об ошибке",
+     *                  example="Unauthenticated."
      *              )
      *          )
      *      ),
@@ -271,6 +327,7 @@ class PostController extends Controller
      * @OA\Delete(
      *      path="/api/posts/{id}",
      *      tags={"Posts"},
+     *      security={{"sanctum": {}}},
      *      @OA\Parameter(
      *          name="id",
      *          in="path",
@@ -290,6 +347,19 @@ class PostController extends Controller
      *                  property="message",
      *                  type="string",
      *                  description="Сообщение об успешной операции"
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response="401",
+     *          description="Ошибка авторизации",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string",
+     *                  description="Сообщение об ошибке",
+     *                  example="Unauthenticated."
      *              )
      *          )
      *      ),

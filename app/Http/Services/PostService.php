@@ -28,7 +28,7 @@ class PostService extends Controller
         return response()->json(
             [
                 'message' => 'Пост успешно создан',
-                'data' => Post::create($storePostRequest->all()),
+                'data' => PostResource::make(Post::create($storePostRequest->all())),
             ],
             Response::HTTP_CREATED
         );
@@ -39,7 +39,7 @@ class PostService extends Controller
         return response()->json(
             [
                 'message' => 'Пост успешно получен',
-                'data' => new PostResource(Post::findOrFail($id)),
+                'data' => PostResource::make(Post::findOrFail($id)),
             ],
             Response::HTTP_OK
         );
@@ -52,7 +52,7 @@ class PostService extends Controller
         return response()->json(
             [
                 'message' => 'Пост успешно обновлен',
-                'data' => new PostResource($post),
+                'data' => PostResource::make($post),
             ],
             Response::HTTP_OK
         );
