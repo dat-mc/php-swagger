@@ -8,21 +8,16 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
 
 class PostService extends Controller
 {
-    public function index(): JsonResponse
+    public function index(): AnonymousResourceCollection
     {
-        return response()->json(
-            [
-                'message' => 'Посты успешно получены',
-                'data' => PostResource::collection(Post::all()),
-            ],
-            Response::HTTP_OK,
-            [],
-            JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
-        );
+        return PostResource::collection(Post::paginate(10))->additional([
+            'message' => 'Посты успешно получены'
+        ]);
     }
 
     public function store(StorePostRequest $storePostRequest): JsonResponse

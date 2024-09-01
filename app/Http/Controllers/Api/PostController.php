@@ -7,6 +7,7 @@ use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Http\Services\PostService;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 /**
  * @OA\Tag(
@@ -27,6 +28,16 @@ class PostController extends Controller
      * @OA\Get(
      *      path="/api/posts",
      *      tags={"Posts"},
+     *      @OA\Parameter(
+     *          name="page",
+     *          in="query",
+     *          required=false,
+     *          description="Номер страницы",
+     *          @OA\Schema(
+     *              type="integer",
+     *              example=1
+     *          )
+     *      ),
      *      @OA\Response(
      *          response="200",
      *          description="Посты успешно получены",
@@ -45,19 +56,6 @@ class PostController extends Controller
      *          )
      *      ),
      *      @OA\Response(
-     *          response="401",
-     *          description="Ошибка авторизации",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              @OA\Property(
-     *                  property="message",
-     *                  type="string",
-     *                  description="Сообщение об ошибке",
-     *                  example="Unauthenticated."
-     *              )
-     *          )
-     *      ),
-     *      @OA\Response(
      *          response="500",
      *          description="Произошла ошибка",
      *          @OA\JsonContent(
@@ -72,7 +70,7 @@ class PostController extends Controller
      *      )
      * )
      */
-    public function index(): JsonResponse
+    public function index(): AnonymousResourceCollection
     {
         return $this->postService->index();
     }
@@ -183,19 +181,6 @@ class PostController extends Controller
      *              @OA\Property(
      *                  property="data",
      *                  ref="#/components/schemas/PostResource"
-     *              )
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response="401",
-     *          description="Ошибка авторизации",
-     *          @OA\JsonContent(
-     *              type="object",
-     *              @OA\Property(
-     *                  property="message",
-     *                  type="string",
-     *                  description="Сообщение об ошибке",
-     *                  example="Unauthenticated."
      *              )
      *          )
      *      ),
