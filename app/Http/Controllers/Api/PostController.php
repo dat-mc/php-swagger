@@ -80,7 +80,7 @@ class PostController extends Controller
 
     /**
      * @OA\Post(
-     *      path="/api/posts",
+     *      path="/api/post",
      *      tags={"Posts"},
      *      security={{"sanctum": {}}},
      *      @OA\RequestBody(
@@ -159,7 +159,7 @@ class PostController extends Controller
 
     /**
      * @OA\Get(
-     *      path="/api/posts/{id}",
+     *      path="/api/post/{id}",
      *      tags={"Posts"},
      *      security={{"sanctum": {}}},
      *      @OA\Parameter(
@@ -223,7 +223,7 @@ class PostController extends Controller
 
     /**
      * @OA\Put(
-     *      path="/api/posts/{id}",
+     *      path="/api/post",
      *      tags={"Posts"},
      *      security={{"sanctum": {}}},
      *      @OA\Parameter(
@@ -325,7 +325,7 @@ class PostController extends Controller
 
     /**
      * @OA\Delete(
-     *      path="/api/posts/{id}",
+     *      path="/api/post/{id}",
      *      tags={"Posts"},
      *      security={{"sanctum": {}}},
      *      @OA\Parameter(

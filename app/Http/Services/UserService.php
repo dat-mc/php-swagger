@@ -13,45 +13,23 @@ use Illuminate\Support\Facades\Auth;
 
 class UserService extends Controller
 {
-    public function logout(): JsonResponse
-    {
-        if (Auth::check()) {
-            Auth::guard('web')->logout();
-            Auth::user()->tokens()->delete();
-
-            return response()->json(
-                [
-                    'message' => 'Вы вышли из аккаунта',
-                ],
-                Response::HTTP_OK
-            );
-        } else {
-            return response()->json(
-                [
-                    'message' => 'Аккаунт не найден',
-                ],
-                Response::HTTP_NOT_FOUND
-            );
-        }
-    }
-
     public function signIn(SignInUserRequest $signInUserRequest): JsonResponse
     {
         if (Auth::attempt([
             'email' => $signInUserRequest->email,
             'password' => $signInUserRequest->password
         ])) {
+            $token = Auth::user()->createToken('bearerToken')->plainTextToken;
+            Auth::guard('web')->logout();
             return response()->json(
                 [
                     'message' => 'Вы вошли в аккаунт',
                     'data' => UserResource::make(
                         User::where('email', $signInUserRequest->email)->first()
                     ),
+                    'token' => $token,
                 ],
-                Response::HTTP_OK,
-                [
-                    'Authorization' => 'Bearer ' . Auth::user()->createToken('bearerToken')->plainTextToken,
-                ]
+                Response::HTTP_OK
             );
         } else {
             return response()->json(

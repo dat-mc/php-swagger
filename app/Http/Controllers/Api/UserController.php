@@ -24,53 +24,6 @@ class UserController extends Controller
     }
 
     /**
-     * @OA\Get(
-     *      path="/api/logout",
-     *      tags={"Users"},
-     *      security={{"sanctum": {}}},
-     *      @OA\Response(
-     *          response="200",
-     *          description="Вы вышли из аккаунта",
-     *          @OA\JsonContent(
-     *              @OA\Property(
-     *                  property="message",
-     *                  type="string",
-     *                  description="Сообщение об успешной операции"
-     *              )
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response="404",
-     *          description="Аккаунт не найден",
-     *          @OA\JsonContent(
-     *              @OA\Property(
-     *                  property="message",
-     *                  type="string",
-     *                  description="Сообщение об ошибке",
-     *                  example="Аккаунт не найден"
-     *              )
-     *          )
-     *      ),
-     *      @OA\Response(
-     *          response="500",
-     *          description="Произошла ошибка",
-     *          @OA\JsonContent(
-     *              @OA\Property(
-     *                  property="message",
-     *                  type="string",
-     *                  description="Сообщение об ошибке",
-     *                  example="Error message"
-     *              )
-     *          )
-     *      )
-     *   )
-     */
-    public function logout(): JsonResponse
-    {
-        return $this->userService->logout();
-    }
-
-    /**
      * @OA\Post(
      *      path="/api/sign-in",
      *      tags={"Users"},
@@ -90,6 +43,11 @@ class UserController extends Controller
      *              @OA\Property(
      *                  property="data",
      *                  ref="#/components/schemas/UserResource"
+     *              ),
+     *              @OA\Property(
+     *                  property="token",
+     *                  type="string",
+     *                  description="Токен доступа"
      *              )
      *          )
      *      ),
