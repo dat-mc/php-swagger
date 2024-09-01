@@ -19,7 +19,9 @@ class PostService extends Controller
                 'message' => 'Посты успешно получены',
                 'data' => PostResource::collection(Post::all()),
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
+            [],
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
         );
     }
 
@@ -30,7 +32,9 @@ class PostService extends Controller
                 'message' => 'Пост успешно создан',
                 'data' => PostResource::make(Post::create($storePostRequest->all())),
             ],
-            Response::HTTP_CREATED
+            Response::HTTP_CREATED,
+            [],
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
         );
     }
 
@@ -41,7 +45,9 @@ class PostService extends Controller
                 'message' => 'Пост успешно получен',
                 'data' => PostResource::make(Post::findOrFail($id)),
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
+            [],
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
         );
     }
 
@@ -54,7 +60,9 @@ class PostService extends Controller
                 'message' => 'Пост успешно обновлен',
                 'data' => PostResource::make($post),
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
+            [],
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
         );
     }
 
@@ -65,7 +73,9 @@ class PostService extends Controller
             [
                 'message' => 'Пост успешно удален',
             ],
-            Response::HTTP_OK
+            Response::HTTP_OK,
+            [],
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
         );
     }
 }

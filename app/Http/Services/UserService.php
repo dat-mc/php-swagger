@@ -29,14 +29,18 @@ class UserService extends Controller
                     ),
                     'token' => $token,
                 ],
-                Response::HTTP_OK
+                Response::HTTP_OK,
+                [],
+                JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
             );
         } else {
             return response()->json(
                 [
                     'message' => 'Неверный email или пароль',
                 ],
-                Response::HTTP_UNAUTHORIZED
+                Response::HTTP_UNAUTHORIZED,
+                [],
+                JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
             );
         }
     }
@@ -48,7 +52,9 @@ class UserService extends Controller
                 'message' => 'Пользователь успешно создан',
                 'data' => UserResource::make(User::create($signUpUserRequest->all())),
             ],
-            Response::HTTP_CREATED
+            Response::HTTP_CREATED,
+            [],
+            JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE
         );
     }
 }

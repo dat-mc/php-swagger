@@ -27,7 +27,6 @@ class PostController extends Controller
      * @OA\Get(
      *      path="/api/posts",
      *      tags={"Posts"},
-     *      security={{"sanctum": {}}},
      *      @OA\Response(
      *          response="200",
      *          description="Посты успешно получены",
@@ -82,7 +81,6 @@ class PostController extends Controller
      * @OA\Post(
      *      path="/api/post",
      *      tags={"Posts"},
-     *      security={{"sanctum": {}}},
      *      @OA\RequestBody(
      *          required=true,
      *          @OA\JsonContent(ref="#/components/schemas/StorePostRequest")
