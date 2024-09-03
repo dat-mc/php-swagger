@@ -79,6 +79,7 @@ class PostController extends Controller
      * @OA\Post(
      *      path="/api/post",
      *      tags={"Posts"},
+     *      security={{"sanctum": {}}},
      *      @OA\RequestBody(
      *          required=true,
      *          @OA\JsonContent(ref="#/components/schemas/StorePostRequest")
