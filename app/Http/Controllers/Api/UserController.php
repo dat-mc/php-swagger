@@ -65,6 +65,27 @@ class UserController extends Controller
      *          )
      *      ),
      *      @OA\Response(
+     *          response="422",
+     *          description="Невалидные данные",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string",
+     *                  description="Сообщение об ошибке",
+     *                  example="The given data was invalid."
+     *              ),
+     *              @OA\Property(
+     *                  property="errors",
+     *                  type="array",
+     *                  @OA\Items(
+     *                      type="string",
+     *                      example="The email field is required."
+     *                  )
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(
      *          response="500",
      *          description="Произошла ошибка",
      *          @OA\JsonContent(
@@ -104,6 +125,27 @@ class UserController extends Controller
      *              @OA\Property(
      *                  property="data",
      *                  ref="#/components/schemas/UserResource"
+     *              )
+     *          )
+     *      ),
+     *      @OA\Response(
+     *          response="422",
+     *          description="Невалидные данные",
+     *          @OA\JsonContent(
+     *              type="object",
+     *              @OA\Property(
+     *                  property="message",
+     *                  type="string",
+     *                  description="Сообщение об ошибке",
+     *                  example="The given data was invalid."
+     *              ),
+     *              @OA\Property(
+     *                  property="errors",
+     *                  type="array",
+     *                  @OA\Items(
+     *                      type="string",
+     *                      example="The email field is required."
+     *                  )
      *              )
      *          )
      *      ),
